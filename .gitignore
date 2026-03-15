@@ -1,0 +1,4 @@
+Result_Manage.db
+venv/
+__pycache__/
+*.pyc
