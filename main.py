@@ -1,18 +1,19 @@
 import flet as ft
+import os
 from login_view import login_page
 from admin_dashboard import admin_dashboard
 from student_dashboard import student_dashboard
 
 
 def main(page: ft.Page):
-    page.title = "Student Result Management System"
-    page.window.width      = 1200
-    page.window.height     = 750
+    page.title        = "Student Result Management System"
+    page.window.width  = 1200
+    page.window.height = 750
     page.window.min_width  = 900
     page.window.min_height = 600
-    page.theme_mode        = ft.ThemeMode.DARK
-    page.padding           = 0
-    page.bgcolor           = "#0d1b2a"
+    page.theme_mode   = ft.ThemeMode.DARK
+    page.padding      = 0
+    page.bgcolor      = "#0d1b2a"
 
     session = {"uid": None, "uname": None, "role": None, "roll_no": None}
 
@@ -31,6 +32,11 @@ def main(page: ft.Page):
 
 
 if __name__ == "__main__":
-    ft.run(main)
-    # Web ke liye:
-    # ft.run(main, view=ft.AppView.WEB_BROWSER, port=8080)
+    # Web deploy ke liye PORT env variable use karta hai
+    port = int(os.environ.get("PORT", 8080))
+    ft.app(
+        target=main,
+        view=ft.AppView.WEB_BROWSER,
+        host="0.0.0.0",
+        port=port,
+    )
